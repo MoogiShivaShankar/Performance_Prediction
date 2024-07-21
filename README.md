@@ -35,4 +35,4 @@ Send a POST request to `/predict` with JSON data containing player statistics to
 - Add more advanced models and compare their performance
 - Extend the model to predict match outcomes
 
-Feel free to contribute or provide feedback!
+Feel free to contribute or provide feedback! 
