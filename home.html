@@ -36,14 +36,14 @@
         <label for="Balls">Balls:</label>
         <input type="number" id="Balls" required><br>
 
-        <label for="4s">4s:</label>
-        <input type="number" id="4s" required><br>
+        <label for="_4s">4s:</label>
+        <input type="number" id="_4s" required><br>
 
-        <label for="6s">6s:</label>
-        <input type="number" id="6s" required><br>
+        <label for="_6s">6s:</label>
+        <input type="number" id="_6s" required><br>
 
         <label for="Strike_Rate">Strike Rate:</label>
-        <input type="number" id="Strike_Rate" required><br>
+        <input type="number" id="Strike_Rate" step="0.01" required><br>
 
         <label for="Maidens">Maidens:</label>
         <input type="number" id="Maidens" required><br>
@@ -52,10 +52,10 @@
         <input type="number" id="Wickets" required><br>
 
         <label for="Economy">Economy:</label>
-        <input type="number" id="Economy" required><br>
+        <input type="number" id="Economy" step="0.01" required><br>
 
         <label for="Overs">Overs:</label>
-        <input type="number" id="Overs" required><br>
+        <input type="number" id="Overs" step="0.1" required><br>
 
         <button type="submit">Predict Performance</button>
     </form>
@@ -68,14 +68,14 @@
             e.preventDefault();
 
             const formData = {
-                Batting_Position: parseFloat(document.getElementById('Batting_Position').value),
-                Runs: parseFloat(document.getElementById('Runs').value),
-                Balls: parseFloat(document.getElementById('Balls').value),
-                "4s": parseFloat(document.getElementById('4s').value),
-                "6s": parseFloat(document.getElementById('6s').value),
+                Batting_Position: parseInt(document.getElementById('Batting_Position').value),
+                Runs: parseInt(document.getElementById('Runs').value),
+                Balls: parseInt(document.getElementById('Balls').value),
+                _4s: parseInt(document.getElementById('_4s').value),
+                _6s: parseInt(document.getElementById('_6s').value),
                 Strike_Rate: parseFloat(document.getElementById('Strike_Rate').value),
-                Maidens: parseFloat(document.getElementById('Maidens').value),
-                Wickets: parseFloat(document.getElementById('Wickets').value),
+                Maidens: parseInt(document.getElementById('Maidens').value),
+                Wickets: parseInt(document.getElementById('Wickets').value),
                 Economy: parseFloat(document.getElementById('Economy').value),
                 Overs: parseFloat(document.getElementById('Overs').value)
             };

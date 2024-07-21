@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Performance Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-image: url('https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg');
+            background-size: cover;
+            background-attachment: fixed;
+            color: #000080; /* Navy blue */
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #FF9933; /* Deep saffron */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        label {
+            display: inline-block;
+            width: 150px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input {
+            width: 200px;
+            padding: 5px;
+            border: 1px solid #138808; /* India green */
+            border-radius: 5px;
+        }
+        button {
+            margin-top: 20px;
+            background-color: #FF9933; /* Deep saffron */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #138808; /* India green */
+        }
+        #result {
+            font-weight: bold;
+            font-size: 18px;
+            color: #000080; /* Navy blue */
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cricket Performance Predictor</h1>
+        <form id="predictionForm">
+            <label for="Batting_Position">Batting Position:</label>
+            <input type="number" id="Batting_Position" required><br>
+
+            <label for="Runs">Runs:</label>
+            <input type="number" id="Runs" required><br>
+
+            <label for="Balls">Balls:</label>
+            <input type="number" id="Balls" required><br>
+
+            <label for="_4s">4s:</label>
+            <input type="number" id="_4s" required><br>
+
+            <label for="_6s">6s:</label>
+            <input type="number" id="_6s" required><br>
+
+            <label for="Strike_Rate">Strike Rate:</label>
+            <input type="number" id="Strike_Rate" step="0.01" required><br>
+
+            <label for="Maidens">Maidens:</label>
+            <input type="number" id="Maidens" required><br>
+
+            <label for="Wickets">Wickets:</label>
+            <input type="number" id="Wickets" required><br>
+
+            <label for="Economy">Economy:</label>
+            <input type="number" id="Economy" step="0.01" required><br>
+
+            <label for="Overs">Overs:</label>
+            <input type="number" id="Overs" step="0.1" required><br>
+
+            <button type="submit">Predict Performance</button>
+        </form>
+
+        <h2>Prediction Result:</h2>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        document.getElementById('predictionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                Batting_Position: document.getElementById('Batting_Position').value,
+                Runs: document.getElementById('Runs').value,
+                Balls: document.getElementById('Balls').value,
+                _4s: document.getElementById('_4s').value,
+                _6s: document.getElementById('_6s').value,
+                Strike_Rate: document.getElementById('Strike_Rate').value,
+                Maidens: document.getElementById('Maidens').value,
+                Wickets: document.getElementById('Wickets').value,
+                Economy: document.getElementById('Economy').value,
+                Overs: document.getElementById('Overs').value
+            };
+
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    document.getElementById('result').innerText = 'Error: ' + data.error;
+                } else {
+                    document.getElementById('result').innerText = 'Predicted Performance Score: ' + data.predicted_performance_score.toFixed(2);
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                document.getElementById('result').innerText = 'An error occurred while making the prediction.';
+            });
+        });
+    </script>
+</body>
+</html>
